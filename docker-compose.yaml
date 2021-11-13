@@ -10,7 +10,9 @@ services:
     container_name: nodejs
     networks: 
       - nodenet
-
+    depends_on:
+      - db
+    
   nginx:
     build: 
       context: ./nginx
@@ -21,14 +23,19 @@ services:
       - nodenet
     ports: 
       - "8080:80"
+    depends_on:
+      - nodejs
+
   db:
     image: mysql:5.7
     command: --innodb-use-native-aio=0
+             --init-file /data/application/init.sql
     container_name: db
     restart: always
     tty: true
     volumes: 
       - ./mysql:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
     environment: 
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root

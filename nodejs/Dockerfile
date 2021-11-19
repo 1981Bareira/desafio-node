@@ -13,5 +13,3 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 RUN npm install express --save
 RUN npm install mysql2 --save
-RUN dockerize -wait tcp://db:3306
-CMD ["node","index.js"]

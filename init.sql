@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS nodedb;
 use nodedb;
 CREATE TABLE IF NOT EXISTS people(
 ID int not null auto_increment,
